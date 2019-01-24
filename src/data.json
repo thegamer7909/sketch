@@ -12,6 +12,15 @@
       "path": "/",
       "color": "white"
     },
+    "animal": {
+      "title": "animal",
+      "id": "animal",
+      "description": "",
+      "path": "/sketch/animal.html",
+      "posted": "2019.x.x",
+      "update": "",
+      "color": "white"
+    },
     "dna": {
       "title": "dna",
       "id": "dna",
