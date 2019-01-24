@@ -1,5 +1,9 @@
 import * as THREE from 'three';
 import debounce from 'js-util/debounce';
+import sleep from 'js-util/sleep';
+
+import PromiseOBJLoader from '../../common/PromiseOBJLoader';
+import Boar from './Boar';
 
 export default async function() {
   // ==========
@@ -21,6 +25,10 @@ export default async function() {
   // ==========
   // Define unique variables
   //
+  let boar;
+
+  // For the preloader.
+  const preloader = document.querySelector('.p-preloader');
 
   // ==========
   // Define functions
@@ -67,15 +75,25 @@ export default async function() {
   // ==========
   // Initialize
   //
-  renderer.setClearColor(0xeeeeee, 1.0);
+  renderer.setClearColor(0x111111, 0.0);
 
   camera.aspect = 3 / 2;
   camera.far = 1000;
-  camera.position.set(0, 0, 300);
+  camera.position.set(0, 0, 50);
   camera.lookAt(new THREE.Vector3());
+
+  const obj = await PromiseOBJLoader('/sketch-threejs/model/wild_animals/boar.obj');
+  const boarGeometry = obj.children[0].geometry;
+
+  boar = new Boar(boarGeometry);
+
+  scene.add(boar)
 
   on();
   resizeWindow();
+
+  preloader.classList.add('is-hidden');
+  await sleep(200);
 
   clock.start();
   renderLoop();

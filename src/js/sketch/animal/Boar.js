@@ -2,9 +2,10 @@ import * as THREE from 'three';
 import MathEx from 'js-util/MathEx';
 
 export default class Boar extends THREE.Mesh {
-  constructor() {
-    // Define Geometry
-    const geometry = new THREE.BoxBufferGeometry(10, 10, 10);
+  constructor(geometry) {
+    // Adjust Geometry.
+    geometry.translate(-0.5, -0.5, 0);
+    geometry.scale(10, 10, 10);
 
     // Define Material
     const material = new THREE.RawShaderMaterial({
@@ -16,6 +17,7 @@ export default class Boar extends THREE.Mesh {
       },
       vertexShader: require('./glsl/boar.vs'),
       fragmentShader: require('./glsl/boar.fs'),
+      wireframe: true,
     });
 
     // Create Object3D
