@@ -15,7 +15,7 @@ export default function() {
   const scene = new THREE.Scene();
   const sceneBack = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-  const cameraBack = new THREE.PerspectiveCamera(45, document.body.clientWidth / window.innerHeight, 1, 10000);
+  const cameraBack = new THREE.PerspectiveCamera(45, document.body.clientWidth / window.innerHeight, 1, 2);
   const clock = new THREE.Clock();
 
   const vectorTouchStart = new THREE.Vector2();
@@ -46,8 +46,10 @@ export default function() {
   }
   const render = () => {
     const time = clock.getDelta();
-    renderer.render(sceneBack, cameraBack, renderBack1);
+    renderer.setRenderTarget(renderBack1);
+    renderer.render(sceneBack, cameraBack);
     postEffect.render(time);
+    renderer.setRenderTarget(null);
     renderer.render(scene, camera);
   }
   const renderLoop = () => {
@@ -108,8 +110,6 @@ export default function() {
   const init = () => {
     renderer.setSize(document.body.clientWidth, window.innerHeight);
     renderer.setClearColor(0x555555, 1.0);
-    cameraBack.position.set(1000, 1000, 1000);
-    cameraBack.lookAt(new THREE.Vector3());
 
     bgImg.init(() => {
       sceneBack.add(bgImg.obj);
