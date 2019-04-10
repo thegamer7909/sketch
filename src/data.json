@@ -12,6 +12,15 @@
       "path": "/",
       "color": "white"
     },
+    "bubble": {
+      "title": "bubble",
+      "id": "bubble",
+      "description": "",
+      "path": "/sketch/bubble.html",
+      "posted": "2019.4.x",
+      "update": "",
+      "color": "black"
+    },
     "sun": {
       "title": "sun",
       "id": "sun",
