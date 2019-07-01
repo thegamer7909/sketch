@@ -21,6 +21,8 @@ if (pageId == 'index') {
 
   switch (pageId) {
     case 'bubble':      require('./sketch/bubble/init.js').default(); break;
+    case 'crystal':     require('./sketch/crystal/init.js').default(); break;
+    case 'node':        require('./sketch/node/init.js').default(); break;
     case 'sun':         require('./sketch/sun/init.js').default(); break;
     case 'easy_glitch': require('./sketch/easy_glitch/init.js').default(); break;
     case 'dissolve':    require('./sketch/dissolve/init.js').default(); break;

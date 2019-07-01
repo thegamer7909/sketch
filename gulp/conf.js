@@ -7,6 +7,9 @@ const DIR = module.exports.DIR =  {
   DEST: 'dst',
   BUILD: 'docs'
 };
+const WEBPACK_CONFIG = {
+  NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+};
 
 module.exports.serve = {
   dest: {
@@ -39,6 +42,7 @@ module.exports.serve = {
   }
 };
 
+const { DefinePlugin } = require('webpack');
 module.exports.scripts = {
   src: [
     `./${DIR.SRC}/**/*.js`,
@@ -51,9 +55,11 @@ module.exports.scripts = {
     production: `./${DIR.BUILD}/js/`,
   },
   webpack: {
-    entry: `./${DIR.SRC}/js/main.js`,
+    entry: {
+      main: `./${DIR.SRC}/js/main.js`,
+    },
     output: {
-      filename: `main.js`
+      filename: `[name].js`
     },
     module: {
       rules: [
@@ -89,7 +95,10 @@ module.exports.scripts = {
           }
         }
       ]
-    }
+    },
+    plugins: [
+      new DefinePlugin(WEBPACK_CONFIG),
+    ],
   }
 };
 
