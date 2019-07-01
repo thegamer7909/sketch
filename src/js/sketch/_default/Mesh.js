@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+
+import vs from './glsl/Mesh.vs';
+import fs from './glsl/Mesh.fs';
 
 export default class Mesh extends THREE.Mesh {
   constructor() {
@@ -14,15 +16,17 @@ export default class Mesh extends THREE.Mesh {
           value: 0
         },
       },
-      vertexShader: require('./glsl/mesh.vs'),
-      fragmentShader: require('./glsl/mesh.fs'),
+      vertexShader: vs,
+      fragmentShader: fs,
     });
 
     // Create Object3D
     super(geometry, material);
     this.name = 'Mesh';
   }
-  render(time) {
+  start() {
+  }
+  update(time) {
     this.material.uniforms.time.value += time;
   }
 }

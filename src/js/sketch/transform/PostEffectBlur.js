@@ -31,8 +31,8 @@ export default class PostEffectBlur {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: this.uniforms,
-      vertexShader: require('./glsl/postEffect.vs'),
-      fragmentShader: require('./glsl/postEffectBlur.fs'),
+      vertexShader: require('./glsl/postEffect.vs').default,
+      fragmentShader: require('./glsl/postEffectBlur.fs').default,
     });
 
     // Create Object3D
@@ -42,9 +42,10 @@ export default class PostEffectBlur {
   resize(resolution) {
     this.uniforms.resolution.value.set(resolution.x, resolution.y);
   }
-  render(renderer, scene, camera, renderTarget) {
+  render(renderer, scene, camera, renderTarget = null) {
     this.obj.visible = true;
-    renderer.render(scene, camera, renderTarget);
+    renderer.setRenderTarget(renderTarget);
+    renderer.render(scene, camera);
     this.obj.visible = false;
   }
 }

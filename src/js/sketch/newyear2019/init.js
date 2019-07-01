@@ -99,17 +99,20 @@ export default async function() {
     typo.material.uniforms.drawBrightOnly.value = 0;
     confetti.visible = true;
     bg.visible = true;
-    renderer.render(scene, camera, renderTarget1);
+    renderer.setRenderTarget(renderTarget1);
+    renderer.render(scene, camera);
 
     // Render the only bright to frame buffer.
     boarHead.material.uniforms.drawBrightOnly.value = 1;
     typo.material.uniforms.drawBrightOnly.value = 1;
     confetti.visible = false;
     bg.visible = false;
-    renderer.render(scene, camera, renderTarget2);
+    renderer.setRenderTarget(renderTarget2);
+    renderer.render(scene, camera);
 
     // Render the post effect.
     postEffect.render(time);
+    renderer.setRenderTarget(null);
     renderer.render(scenePE, cameraPE);
   };
   const renderLoop = () => {

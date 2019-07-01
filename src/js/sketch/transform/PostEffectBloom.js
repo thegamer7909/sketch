@@ -27,17 +27,18 @@ export default class PostEffectBloom {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: this.uniforms,
-      vertexShader: require('./glsl/postEffect.vs'),
-      fragmentShader: require('./glsl/postEffectBloom.fs'),
+      vertexShader: require('./glsl/postEffect.vs').default,
+      fragmentShader: require('./glsl/postEffectBloom.fs').default,
     });
 
     // Create Object3D
     this.obj = new THREE.Mesh(geometry, material);
     this.obj.visible = false;
   }
-  render(renderer, scene, camera, renderTarget) {
+  render(renderer, scene, camera, renderTarget = null) {
     this.obj.visible = true;
-    renderer.render(scene, camera, renderTarget);
+    renderer.setRenderTarget(renderTarget);
+    renderer.render(scene, camera);
     this.obj.visible = false;
   }
 }

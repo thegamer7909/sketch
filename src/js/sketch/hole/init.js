@@ -77,8 +77,8 @@ export default function() {
           value: force.velocity,
         },
       },
-      vertexShader: require('./glsl/points.vs'),
-      fragmentShader: require('./glsl/points.fs'),
+      vertexShader: require('./glsl/points.vs').default,
+      fragmentShader: require('./glsl/points.fs').default,
       transparent: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending
@@ -133,8 +133,8 @@ export default function() {
           },
         }
       ]),
-      vertexShader: require('./glsl/object.vs'),
-      fragmentShader: require('./glsl/object.fs'),
+      vertexShader: require('./glsl/object.vs').default,
+      fragmentShader: require('./glsl/object.fs').default,
       flatShading: true,
       lights: true,
     });
@@ -150,8 +150,8 @@ export default function() {
           value: 0,
         },
       },
-      vertexShader: require('./glsl/bg.vs'),
-      fragmentShader: require('./glsl/bg.fs'),
+      vertexShader: require('./glsl/bg.vs').default,
+      fragmentShader: require('./glsl/bg.fs').default,
       side: THREE.BackSide,
     });
     return new THREE.Mesh(geometry, material);
@@ -185,8 +185,8 @@ export default function() {
           value: 0,
         },
       },
-      vertexShader: require('./glsl/fb_points.vs'),
-      fragmentShader: require('./glsl/fb_points.fs'),
+      vertexShader: require('./glsl/fb_points.vs').default,
+      fragmentShader: require('./glsl/fb_points.fs').default,
     });
     return new THREE.Points(geometry, material);
   };
@@ -202,8 +202,8 @@ export default function() {
           value: 0,
         },
       },
-      vertexShader: require('./glsl/fb_bg.vs'),
-      fragmentShader: require('./glsl/fb_bg.fs'),
+      vertexShader: require('./glsl/fb_bg.vs').default,
+      fragmentShader: require('./glsl/fb_bg.fs').default,
       side: THREE.BackSide,
     });
     return new THREE.Mesh(geometry, material);
@@ -232,8 +232,8 @@ export default function() {
           value: render_target2.texture,
         },
       },
-      vertexShader: require('./glsl/fb.vs'),
-      fragmentShader: require('./glsl/fb.fs'),
+      vertexShader: require('./glsl/fb.vs').default,
+      fragmentShader: require('./glsl/fb.fs').default,
       transparent: true
     });
     return new THREE.Mesh(geometry, material);
@@ -311,8 +311,11 @@ export default function() {
     sub_camera2.force.look.applyDrag(0.4);
     sub_camera2.force.look.updateVelocity();
     sub_camera2.updateLook();
-    renderer.render(sub_scene2, sub_camera2, render_target2);
-    renderer.render(sub_scene, sub_camera, render_target);
+    renderer.setRenderTarget(render_target2);
+    renderer.render(sub_scene2, sub_camera2);
+    renderer.setRenderTarget(render_target);
+    renderer.render(sub_scene, sub_camera);
+    renderer.setRenderTarget(null);
     renderer.render(scene, camera);
   }
   const renderLoop = () => {

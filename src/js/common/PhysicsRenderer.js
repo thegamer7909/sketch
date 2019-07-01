@@ -1,6 +1,5 @@
 const THREE = require('three');
 
-
 export default class PhysicsRenderer {
   constructor(aVertexShader, aFragmentShader, vVertexShader, vFragmentShader) {
     this.side = 0;
@@ -137,8 +136,8 @@ export default class PhysicsRenderer {
             value: this.vUniforms.velocityInit.value,
           },
         },
-        vertexShader: require('./glsl/physicsRenderer.vs'),
-        fragmentShader: require('./glsl/physicsRendererVelocityInit.fs'),
+        vertexShader: require('./glsl/physicsRenderer.vs').default,
+        fragmentShader: require('./glsl/physicsRendererVelocityInit.fs').default,
       })
     );
     for (var i = 0; i < 2; i++) {
@@ -147,8 +146,10 @@ export default class PhysicsRenderer {
     }
     this.vScene.add(this.camera);
     this.vScene.add(velocityInitMesh);
-    renderer.render(this.vScene, this.camera, this.velocity[0]);
-    renderer.render(this.vScene, this.camera, this.velocity[1]);
+    renderer.setRenderTarget(this.velocity[0]);
+    renderer.render(this.vScene, this.camera);
+    renderer.setRenderTarget(this.velocity[1]);
+    renderer.render(this.vScene, this.camera);
     this.vScene.remove(velocityInitMesh);
     this.vScene.add(this.velocityMesh);
     this.aScene.add(this.accelerationMesh);
@@ -168,10 +169,12 @@ export default class PhysicsRenderer {
     const nextIndex = this.targetIndex;
     this.aUniforms.acceleration.value = this.acceleration[prevIndex].texture;
     this.aUniforms.velocity.value = this.velocity[nextIndex].texture;
-    renderer.render(this.aScene, this.camera, this.acceleration[nextIndex]);
+    renderer.setRenderTarget(this.acceleration[nextIndex]);
+    renderer.render(this.aScene, this.camera);
     this.vUniforms.acceleration.value = this.acceleration[nextIndex].texture;
     this.vUniforms.velocity.value = this.velocity[nextIndex].texture;
-    renderer.render(this.vScene, this.camera, this.velocity[prevIndex]);
+    renderer.setRenderTarget(this.velocity[prevIndex]);
+    renderer.render(this.vScene, this.camera);
     this.targetIndex = prevIndex;
     this.aUniforms.time.value += time;
     this.vUniforms.time.value += time;

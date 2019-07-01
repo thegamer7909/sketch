@@ -43,8 +43,8 @@ export default class Floor {
     // Define Material
     const material = new THREE.RawShaderMaterial({
       uniforms: this.uniforms,
-      vertexShader: require('./glsl/floor.vs'),
-      fragmentShader: require('./glsl/floor.fs'),
+      vertexShader: require('./glsl/floor.vs').default,
+      fragmentShader: require('./glsl/floor.fs').default,
       transparent: true
     });
 
@@ -66,7 +66,8 @@ export default class Floor {
     this.uniforms.time.value += time;
     this.updateTextureMatrix();
     this.obj.visible = false;
-    renderer.render(sceneBack, this.mirrorCamera, this.renderBack1);
+    renderer.setRenderTarget(this.renderBack1);
+    renderer.render(sceneBack, this.mirrorCamera);
     this.obj.visible = true;
     this.postEffectBlurX.render(renderer, scene, camera, this.renderBack2);
     this.postEffectBlurY.render(renderer, scene, camera, this.mirrorRender);

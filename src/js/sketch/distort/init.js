@@ -58,8 +58,8 @@ export default function() {
           }
         }
       ]),
-      vertexShader: require('./glsl/object.vs'),
-      fragmentShader: require('./glsl/object.fs'),
+      vertexShader: require('./glsl/object.vs').default,
+      fragmentShader: require('./glsl/object.fs').default,
       lights: true,
     });
     return new THREE.Mesh(geometry, material);
@@ -96,8 +96,8 @@ export default function() {
           value: render_target,
         },
       },
-      vertexShader: require('./glsl/posteffect.vs'),
-      fragmentShader: require('./glsl/posteffect.fs'),
+      vertexShader: require('./glsl/posteffect.vs').default,
+      fragmentShader: require('./glsl/posteffect.fs').default,
     });
     return new THREE.Mesh(geometry, material);
   }
@@ -141,7 +141,6 @@ export default function() {
     force.applyHook(0, force.k);
     force.applyDrag(force.d);
     force.updateVelocity();
-    // console.log(force.acceleration.length());
     sphere.material.uniforms.time.value += time_unit;
     sphere.material.uniforms.radius.value = force.velocity.x;
     sphere.material.uniforms.distort.value = force.velocity.x / 2 - 0.1;
@@ -165,7 +164,9 @@ export default function() {
     camera.force.look.updateVelocity();
     camera.lookAt(camera.force.look.velocity);
 
-    renderer.render(sub_scene, sub_camera, render_target);
+    renderer.setRenderTarget(render_target);
+    renderer.render(sub_scene, sub_camera);
+    renderer.setRenderTarget(null);
     renderer.render(scene, camera);
   }
   const renderLoop = () => {
