@@ -1,5 +1,7 @@
 import * as THREE from 'three';
-import MathEx from 'js-util/MathEx';
+
+import vs from './glsl/InstanceMesh.vs';
+import fs from './glsl/InstanceMesh.fs';
 
 export default class InstanceMesh extends THREE.Mesh {
   constructor() {
@@ -26,8 +28,8 @@ export default class InstanceMesh extends THREE.Mesh {
           value: 0
         },
       },
-      vertexShader: require('./glsl/instanceMesh.vs'),
-      fragmentShader: require('./glsl/instanceMesh.fs'),
+      vertexShader: vs,
+      fragmentShader: fs,
     });
 
     // Create Object3D
@@ -35,7 +37,9 @@ export default class InstanceMesh extends THREE.Mesh {
     this.name = 'InstanceMesh';
     this.frustumCulled = false;
   }
-  render(time) {
+  start() {
+  }
+  update(time) {
     this.material.uniforms.time.value += time;
   }
 }

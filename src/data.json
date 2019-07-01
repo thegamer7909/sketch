@@ -21,6 +21,51 @@
       "update": "",
       "color": "white"
     },
+    "crystal": {
+      "title": "crystal",
+      "id": "crystal",
+      "description": "make the crystal that has the aura inside of self.",
+      "path": "/sketch/crystal.html",
+      "posted": "2019.6.23",
+      "update": "2019.6.29",
+      "color": "white"
+    },
+    "node": {
+      "title": "node",
+      "id": "node",
+      "description": "It is the first step of Interactive Coding.",
+      "path": "/sketch/node.html",
+      "posted": "2019.5.26",
+      "update": "",
+      "color": "black"
+    },
+    "sun": {
+      "title": "sun",
+      "id": "sun",
+      "description": "Creating the sun using some textures. It isn't depending on the Noise calculation.",
+      "path": "/sketch/sun.html",
+      "posted": "2019.4.6",
+      "update": "",
+      "color": "white"
+    },
+    "easyGlitch": {
+      "title": "easy glitch",
+      "id": "easy_glitch",
+      "description": "It attaches a simple glitch effect with only using a noise image and adjusting texCoord.",
+      "path": "/sketch/easy_glitch.html",
+      "posted": "2019.4.2",
+      "update": "",
+      "color": "white"
+    },
+    "dissolve": {
+      "title": "dissolve",
+      "id": "dissolve",
+      "description": "It attaches the dissolve effect made with Noise calculation and UV animation to the simple slideshow.",
+      "path": "/sketch/dissolve.html",
+      "posted": "2019.3.25",
+      "update": "",
+      "color": "white"
+    },
     "dna": {
       "title": "dna",
       "id": "dna",

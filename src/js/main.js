@@ -21,6 +21,11 @@ if (pageId == 'index') {
 
   switch (pageId) {
     case 'animal':      require('./sketch/animal/init.js').default(); break;
+    case 'crystal':     require('./sketch/crystal/init.js').default(); break;
+    case 'node':        require('./sketch/node/init.js').default(); break;
+    case 'sun':         require('./sketch/sun/init.js').default(); break;
+    case 'easy_glitch': require('./sketch/easy_glitch/init.js').default(); break;
+    case 'dissolve':    require('./sketch/dissolve/init.js').default(); break;
     case 'dna':         require('./sketch/dna/init.js').default(); break;
     case 'newyear2019': require('./sketch/newyear2019/init.js').default(); break;
     case 'buddha':      require('./sketch/buddha/init.js').default(); break;
