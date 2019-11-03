@@ -21,6 +21,33 @@
       "update": "",
       "color": "white"
     },
+    "shadow": {
+      "title": "shadow",
+      "id": "shadow",
+      "description": "I never tried primary Depth Buffer Shadow, but I tried it finally.",
+      "path": "/sketch/shadow.html",
+      "posted": "2019.10.x",
+      "update": "",
+      "color": "white"
+    },
+    "splash": {
+      "title": "splash",
+      "id": "splash",
+      "description": "Move the particles with only the texture so that they look like splashes.",
+      "path": "/sketch/splash.html",
+      "posted": "2019.10.7",
+      "update": "2019.10.31",
+      "color": "white"
+    },
+    "burn": {
+      "title": "burn",
+      "id": "burn",
+      "description": "made an image transition function with an effect seems like a paper is burning.",
+      "path": "/sketch/burn.html",
+      "posted": "2019.9.8",
+      "update": "",
+      "color": "white"
+    },
     "crystal": {
       "title": "crystal",
       "id": "crystal",

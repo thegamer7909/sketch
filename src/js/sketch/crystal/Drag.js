@@ -11,6 +11,13 @@ export default class Drag {
     this.anchor = new THREE.Vector2();
     this.isTouched = false;
   }
+  update() {
+    this.a.set(
+      (this.anchor.x - this.v.x) / 10,
+      (this.anchor.y - this.v.y) / 10
+    );
+    this.v.add(this.a);
+  }
   touchStart(e) {
     // If be using PC, event.preventDefault runs at first.
     if (!e.touches) e.preventDefault();
@@ -24,6 +31,8 @@ export default class Drag {
     this.isTouched = true;
   }
   touchMove(e) {
+    e.preventDefault();
+
     const x = (e.touches) ? e.touches[0].clientX : e.clientX;
     const y = (e.touches) ? e.touches[0].clientY : e.clientY;
 
@@ -33,19 +42,8 @@ export default class Drag {
       (x - this.vTouchStart.x) / (this.resolution.x / 200) + this.vPrev.x,
       MathEx.clamp((y - this.vTouchStart.y) / (this.resolution.y / 200) + this.vPrev.y, -90, 90)
     );
-
-    // If be using Mobile, event.preventDefault runs when start to drag.
-    if (e.touches) e.preventDefault();
   }
   touchEnd(e) {
     this.isTouched = false;
-    this.isDraging = false;
-  }
-  update() {
-    this.a.set(
-      (this.anchor.x - this.v.x) / 10,
-      (this.anchor.y - this.v.y) / 10
-    );
-    this.v.add(this.a);
   }
 }
